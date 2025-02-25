@@ -1,8 +1,22 @@
-# React + Vite
+# DownWee - All Downloader  
+DownWee is a video downloader app built with React.js that allows users to download videos from supported platforms by simply pasting the video link.  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features  
+- Paste the video link and download the video instantly.  
+- Supports downloading platform:  
+  - YouTube  
+  - Facebook  
+  - TikTok (including no watermark downloads)  
+  - Instagram  
+  - Twitter  
+  - Threads  
+  - Likee  
+  - Google Drive  
+  - Capcut  
+- Responsive and user-friendly interface.  
 
-Currently, two official plugins are available:
+## Tech Stack  
+- **React.js** - Frontend framework  
+- **Vite** - Fast development build tool  
+- **CSS** - For styling  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
