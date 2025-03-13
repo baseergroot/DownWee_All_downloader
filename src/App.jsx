@@ -1,5 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
+import logo from './assets/1740487219078.jpg';
+import MenuIcon from './components/MenuIcon';
+import CloseIcon from './components/CloseIcon';
+import Option from './components/Option';
+import Howto from "./components/Howto";
+import ThemeToggle from './components/ThemeToggle';
 
 function App() {
   const [input, setInput] = useState("");
@@ -7,6 +13,20 @@ function App() {
   const [showvideo, setShowvideo] = useState("none");
   const [showp, setShowp] = useState("none");
   const [downloadLink, setDownloadLink] = useState('');
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem('darkMode') === 'true' || 
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
+
+  useEffect(() => {
+    // Update body class and localStorage when theme changes
+    document.body.classList.toggle('dark-theme', darkMode);
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
+
+  const toggleTheme = () => {
+    setDarkMode(!darkMode);
+  };
 
   const handleSrc = () => {
     setShowvideo("none");
@@ -47,23 +67,51 @@ function App() {
       console.error("Error downloading file:", error);
     }
   }
-
+  
+  const [menuDisplay, setMenuDisplay] = useState("block");
+  const [closeDisplay, setCloseDisplay] = useState("none");
+  
+  const ToggleMenu = () => {
+    setMenuDisplay(menuDisplay === "none" ? "block" : "none");
+    setCloseDisplay(closeDisplay === "block" ? "none" : "block");
+  }
+  
   return (
-    <>
-      <h1>DownWee <br /> All Downloader</h1>
-      <main>
-        <input
-          type="text"
-          placeholder="Paste Your Link Here"
-          onChange={(e) => {
-            setInput(e.target.value)
-          }}
-          value={input}
-        />
+    <div className={`app-container ${darkMode ? 'dark-theme' : 'light-theme'}`}>
+      <nav>
+        <div className="nav-content">
+          <img src={logo} alt="DownWee Logo" className="logo" />
+          <div className="nav-controls">
+            <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
+            <div className="menu-toggle" onClick={ToggleMenu}>
+              <MenuIcon menuDisplay={menuDisplay} />
+              <CloseIcon closeDisplay={closeDisplay} />
+            </div>
+          </div>
+        </div>
+        <Option closeDisplay={closeDisplay} />
+      </nav>
+      
+      <main id="home">
+        <h1>DownWee <br /><span className="highlight">All Downloader</span></h1>
+        
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="Paste Your Link Here"
+            onChange={(e) => setInput(e.target.value)}
+            value={input}
+            className="link-input"
+          />
+          <button onClick={handleSrc} className="submit-btn">Submit</button>
+        </div>
 
-        <button onClick={handleSrc}>Submit</button>
-
-        <video controls src={vsrc} style={{ display: showvideo }}></video>
+        <video 
+          controls 
+          src={vsrc} 
+          style={{ display: showvideo }}
+          className="video-player"
+        ></video>
 
         <div className="loading" style={{ display: showp }}>
           <div className="loading-text">
@@ -78,10 +126,11 @@ function App() {
         </div>
 
         {downloadLink && (
-          <button onClick={handleDownload}>Download</button>
+          <button onClick={handleDownload} className="download-btn">Download</button>
         )}
       </main>
-    </>
+      {/* <Howto /> */ }
+    </div>
   )
 }
 
