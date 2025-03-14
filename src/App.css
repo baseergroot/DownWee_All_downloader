@@ -88,6 +88,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  min-height: 85vh;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;

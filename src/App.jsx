@@ -6,6 +6,7 @@ import CloseIcon from './components/CloseIcon';
 import Option from './components/Option';
 import Howto from "./components/Howto";
 import ThemeToggle from './components/ThemeToggle';
+import Footer from './components/Footer';
 
 function App() {
   const [input, setInput] = useState("");
@@ -130,6 +131,7 @@ function App() {
         )}
       </main>
       {/* <Howto /> */ }
+      <Footer />
     </div>
   )
 }
