@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://downwee-all-downloader.vercel.app/sitemap.xml
