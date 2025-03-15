@@ -41,10 +41,10 @@ function App() {
       .then(response => response.json())
       .then((data) => {
         setShowp("none");
-        console.log("text: ", data);
+        console.log(data);
         setShowvideo("block");
-        setSrc(data.data.videoUrl);
-        setDownloadLink(data.data.videoUrl);
+        setSrc(data.videoUrl);
+        setDownloadLink(data.videoUrl);
       })
       .catch((error) => {
         setShowp("none");
