@@ -18,6 +18,7 @@ function App() {
     localStorage.getItem('darkMode') === 'true' || 
     window.matchMedia('(prefers-color-scheme: dark)').matches
   );
+  const [videoName, setVideoName] = useState("")
 
   useEffect(() => {
     // Update body class and localStorage when theme changes
@@ -44,6 +45,7 @@ function App() {
         console.log(data);
         setShowvideo("block");
         setSrc(data.videoUrl);
+        setVideoName(data.title)
         setDownloadLink(data.videoUrl);
       })
       .catch((error) => {
@@ -59,7 +61,7 @@ function App() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'video.mp4';
+      a.download = videoName;
       document.body.appendChild(a);
       a.click();
       a.remove();
